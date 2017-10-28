@@ -2,14 +2,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define ANALISE
+//#undef ANALISE
+
 int main()
 {
-    int **tabuleiro = NULL;
     int opcao, n;
 
     while (1) {
         printf("+--------------------------------------------+\n");
+        #ifndef ANALISE
         printf("|           Programa das N Rainhas           |\n");
+        #else
+        printf("|    Programa das N Rainhas - Modo Analise   |\n");
+        #endif
         printf("+--------------------------------------------+\n");
         printf("|                    MENU                    |\n");
         printf("+--------------------------------------------+\n");
@@ -20,6 +26,7 @@ int main()
 
         printf("Entre com a opcao desejada: ");
         scanf("%d", &opcao);
+        printf("\n");
 
         switch (opcao) {
             case 1:
@@ -28,9 +35,11 @@ int main()
                 printf("\n");
                 break;
             case 2:
-                tabuleiro = alocaTabuleiro(n);
-                achaPosicaoRainha(tabuleiro, n, 0);
-                mostraSolucao(tabuleiro, n);
+                #ifndef ANALISE
+                problemaRainha(n);
+                #else
+                problemaRainhaModoAnalise(n);
+                #endif
                 printf("\n");
                 break;
             case 3:
@@ -39,7 +48,10 @@ int main()
             default:
                 printf("Opcao invalida!\n\n");
         }
+        printf("Pressione ENTER para continuar...");
+        getchar();
+        getchar();
+        system("clear");
     }
-
     return 0;
 }
